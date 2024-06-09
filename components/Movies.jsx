@@ -14,7 +14,7 @@ function ListOfMovies({ movies }) {
   );
 }
 function NoMoviesResoult() {
-  return <p>"Movie not Found"</p>;
+  return <p className="movie">"Movie not Found"</p>;
 }
 export function Movies({ movies }) {
 

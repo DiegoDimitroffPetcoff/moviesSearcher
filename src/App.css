@@ -4,6 +4,18 @@ header {
   justify-content: center;
   align-items: center;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  font-size: large;
+}
+h3 {
+  font-size: small;
+}
 .movies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

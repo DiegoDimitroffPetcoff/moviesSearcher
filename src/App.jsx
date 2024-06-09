@@ -5,7 +5,7 @@ import { useMovies } from "./hooks/useMovies";
 
 export function App() {
   const { search, setSearch, error } = useSearcher();
-  const { movies, getMovie } = useMovies({search});
+  const { movies, getMovie } = useMovies({ search });
 
   function handleSubmite(e) {
     e.preventDefault();
@@ -19,7 +19,7 @@ export function App() {
 
   return (
     <>
-      <header className="header">
+      <header >
         <h1>Movies Searcher</h1>
         <form onSubmit={handleSubmite}>
           <input
@@ -31,7 +31,9 @@ export function App() {
             }}
             placeholder="Matrix, Titanic..."
           ></input>
-          <button>Search</button>
+          <div>
+            <button>Search</button>
+          </div>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </header>

@@ -19,8 +19,11 @@ export function App() {
 
   return (
     <>
-      <header >
+      <header>
+        <img style={{ width: "200px", height:"200px"}} src="MovieSearcher.png" alt="icon" />
+
         <h1>Movies Searcher</h1>
+
         <form onSubmit={handleSubmite}>
           <input
             onChange={handleCHange}

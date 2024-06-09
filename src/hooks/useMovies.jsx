@@ -11,6 +11,7 @@ export function useMovies({ search }) {
     type: movie.Type,
     poster: movie.Poster,
     year: movie.Year,
+    imdbID: movie.imdbID
   }));
   const getMovie = () => {
     if (search) {

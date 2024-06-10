@@ -1,22 +1,37 @@
+import { useCallback, useState } from "react";
+
 import "./App.css";
 import { useSearcher } from "./hooks/useSearcher";
 import { Movies } from "./components/Movies";
 import { useMovies } from "./hooks/useMovies";
+import debounce from "just-debounce-it";
 
 export function App() {
+  const [sort, setSort] = useState(false);
   const { search, setSearch, error } = useSearcher();
-  const { movies, loading, getMovie } = useMovies({ search });
+  const { movies, loading, getMovie } = useMovies({ search, sort });
+
+  const debounceSearchMovie = useCallback(
+    debounce((search) => {
+      console.log("debounce");
+      getMovie({ search });
+    }, 500),
+    []
+  );
 
   function handleSubmite(e) {
     e.preventDefault();
-    getMovie(search);
+    getMovie({ search });
   }
   function handleCHange(event) {
-    const newValue = event.target.value;
-    if (newValue.startsWith(" ")) return;
-    setSearch(newValue);
+    const newSearch = event.target.value;
+    if (newSearch.startsWith(" ")) return;
+    setSearch(newSearch);
+    debounceSearchMovie(newSearch);
   }
-
+  function handleSort(params) {
+    setSort(!sort);
+  }
   return (
     <>
       <header>
@@ -38,6 +53,9 @@ export function App() {
             }}
             placeholder="Matrix, Titanic..."
           ></input>
+          <p>Order By Title</p>
+
+          <input type="checkbox" onChange={handleSort}></input>
           <div>
             <button>Search</button>
           </div>
@@ -48,4 +66,3 @@ export function App() {
     </>
   );
 }
- 

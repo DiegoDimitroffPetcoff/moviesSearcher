@@ -1,11 +1,11 @@
 import "./App.css";
 import { useSearcher } from "./hooks/useSearcher";
-import { Movies } from "../components/Movies";
+import { Movies } from "./components/Movies";
 import { useMovies } from "./hooks/useMovies";
 
 export function App() {
   const { search, setSearch, error } = useSearcher();
-  const { movies, getMovie } = useMovies({ search });
+  const { movies, loading, getMovie } = useMovies({ search });
 
   function handleSubmite(e) {
     e.preventDefault();
@@ -20,7 +20,11 @@ export function App() {
   return (
     <>
       <header>
-        <img style={{ width: "200px", height:"200px"}} src="MovieSearcher.png" alt="icon" />
+        <img
+          style={{ width: "200px", height: "200px" }}
+          src="MovieSearcher.png"
+          alt="icon"
+        />
 
         <h1>Movies Searcher</h1>
 
@@ -40,9 +44,8 @@ export function App() {
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </header>
-      <main>
-        <Movies movies={movies} />
-      </main>
+      <main>{loading ? <p>Cargando...</p> : <Movies movies={movies} />}</main>
     </>
   );
 }
+ 
